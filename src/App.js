@@ -2,20 +2,21 @@ import React, { Component } from 'react';
 
 import classes from './App.css';
 import Person from './Person/Person';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
   state = {
     persons: [
-      {id:"asd", name: "Manu", age: "29" },
-      {id:"ss", name: "Max", age: "28" },
-      {id:"sfas", name: "Stephanie", age: "26" }
+      { id: "asd", name: "Manu", age: "29" },
+      { id: "ss", name: "Max", age: "28" },
+      { id: "sfas", name: "Stephanie", age: "26" }
     ]
   }
 
 
-  
-  nameChangeHandler = (event,id) => {
-    const personIndex = this.state.persons.findIndex(p =>{
+
+  nameChangeHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
       return p.id === id;
     });
 
@@ -25,7 +26,7 @@ class App extends Component {
 
     person.name = event.target.value;
 
-    const persons =[...this.state.persons];
+    const persons = [...this.state.persons];
     persons[personIndex] = person;
 
 
@@ -38,10 +39,10 @@ class App extends Component {
     this.setState({ showPersons: !doesShow });
   }
 
-  deletePersonHandler = (personIndex) =>{
+  deletePersonHandler = (personIndex) => {
     const persons = [...this.state.persons]; ///NOTE: By using spread operator you are copying the array and not using its reference and hence not modifying the original state
-    persons.splice(personIndex,1);
-    this.setState({persons:persons});
+    persons.splice(personIndex, 1);
+    this.setState({ persons: persons });
   }
 
   render() {
@@ -55,18 +56,20 @@ class App extends Component {
     // };
 
     let persons = null;
-    let btnClass ='';
+    let btnClass = '';
 
     if (this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map((person,index) => {
-           return <Person
-              click={()=>this.deletePersonHandler(index)}
-              name={person.name}
-              age={person.age} 
-              key={person.id} 
-              changed={(event)=>this.nameChangeHandler(event,person.id)}/>
+          {this.state.persons.map((person, index) => {
+            return <ErrorBoundary key={person.id}>
+              <Person
+                click={() => this.deletePersonHandler(index)}
+                name={person.name}
+                age={person.age}
+                key={person.id}
+                changed={(event) => this.nameChangeHandler(event, person.id)} />
+            </ErrorBoundary>
           })}
 
         </div>
@@ -75,10 +78,10 @@ class App extends Component {
     }
 
     const assignedClasses = [];
-    if(this.state.persons.length<=2){
+    if (this.state.persons.length <= 2) {
       assignedClasses.push(classes.red);
     }
-    if(this.state.persons.length<=1){
+    if (this.state.persons.length <= 1) {
       assignedClasses.push(classes.bold);
     }
 
