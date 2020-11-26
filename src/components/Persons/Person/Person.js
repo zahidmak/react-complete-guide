@@ -22,15 +22,13 @@ class Person extends Component {
     }
     render(){
         console.log('[Person.js] rendering...');
-        return (
+        return [
+            <p key="i1" onClick={this.props.click}>I'm {this.props.name} Person and I am {this.props.age} year olds</p>,
+            <p key="i2">{this.props.children}</p>,
+            <input key="i3" type="text" onChange={this.props.changed} value={this.props.name}/>
+         ]
    
-            <div className={classes.Person}>
-                <p onClick={this.props.click}>I'm {this.props.name} Person and I am {this.props.age} year olds</p>
-                <p>{this.props.children}</p>
-                <input type="text" onChange={this.props.changed} value={this.props.name}/>
-            </div>
-            
-            );
+           
     }
   
 }
