@@ -1,7 +1,7 @@
-import React, {Component. Fragment} from 'react';
+import React, {Component, Fragment} from 'react';
 
 import classes from './Person.css';
-import Auxiliary from '../../../hoc/Auxiliary'
+import Auxiliary from '../../../hoc/Auxiliary';
 
 class Person extends Component {
     // static getDerivedStateFromProps(props,state){
