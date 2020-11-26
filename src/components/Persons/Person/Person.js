@@ -1,26 +1,12 @@
 import React, {Component, Fragment} from 'react';
+import PropTypes from 'prop-types';
 
 import classes from './Person.css';
 import Auxiliary from '../../../hoc/Auxiliary';
 import withClass from '../../../hoc/withClass';
 
 class Person extends Component {
-    // static getDerivedStateFromProps(props,state){
-    //     console.log('[Person.js] getDerivedStateFromProps');
-    //     return state;
-    // }
-    shouldComponentUpdate(nextProps, nextState){
-        console.log('[Person.js] shouldComponentUpdate');
-        return true;
-    }
-    getSnapshotBeforeUpdate(prevProps, prevState){
-        console.log('[Person.js] getSnapShotBeforeUpdate');
-        return null;
-    }
-
-    componentDidUpdate(){
-        console.log('[Person.js] componentDidUpdate')
-    }
+  
     render(){
         console.log('[Person.js] rendering...');
         return (
@@ -34,5 +20,12 @@ class Person extends Component {
            
     }
   
+}
+
+Person.PropTypes = {
+    click: PropTypes.func,
+    name: PropTypes.string,
+    age: PropTypes.number,
+    changed:PropTypes.func
 }
 export default withClass(Person,classes.Person);;
